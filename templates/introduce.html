@@ -1,0 +1,40 @@
+{% extends 'article_news_base.html' %}
+
+{% block content%}
+    <div class="w750 fr">
+    	<div id="list_news">
+    		<h3 class="postion">
+                <span class="dq fl">学院概况</span>
+                <span class="pos fr">
+                    当前位置：<a href="{% url 'gsshy:index' %}">首页</a> >
+                    <a href="{% url 'gsshy:index' %}">学院概况</a> >
+                    <a href="">学院简介</a>
+                </span>
+                <div class="clear"></div>
+            </h3>
+
+    		<div class="content_container">
+                <h3>
+                    学院简介
+                </h3>
+                <div class="function">
+                    <div class="fun_box01">[ <span class="zihao">字号</span> <a href="#" onclick="jQuery('#font_area').removeClass();jQuery('#font_area').addClass('font_area_big');jQuery('#big').css('fontWeight','bold');jQuery('#centre').css('fontWeight','normal');jQuery('#small').css('fontWeight','normal');return false;"><span id="big" class="big">大</span></a> <a href="#" onclick="jQuery('#font_area').removeClass();jQuery('#font_area').addClass('font_area_mid');jQuery('#big').css('fontWeight','normal');jQuery('#centre').css('fontWeight','bold');jQuery('#small').css('fontWeight','normal');return false;"><span id="centre" class="centre" style="font-weight:bold;">中</span></a> <a href="#" onclick="jQuery('#font_area').removeClass();jQuery('#font_area').addClass('font_area_small');jQuery('#big').css('fontWeight','normal');jQuery('#centre').css('fontWeight','normal');jQuery('#small').css('fontWeight','bold');return false;"><span id="small" class="small">小</span></a> ]
+                    </div>
+                    <div class="clear"></div>
+    			</div>
+                <div id="font_area" class="font_area_mid">
+                    <p align="justify">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;社会主义学院是中国共产党领导的统一战线性质的政治学院，是民主党派和无党派人士的联合党校，是开展党的统一战线工作的重要部门。<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2003年中央统战部制定下发的《社会主义学院工作暂行条例》规定，社会主义学院的基本任务是：1、教育培训我省民主党派和无党派人士；2、教育培训统一战线其他方面代表人士；3、教育培训统战工作干部；4、学习、研究和宣传马克思列宁主义、毛泽东思想、邓小平理论和“三个代表”重要思想；5、学习、研究和宣传党的统一战线理论、方针和政策。<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;新世纪新阶段，社会主义学院的任务有了新的变化。在第20次全国统战工作会议上，胡锦涛总书记提出了“五大关系”。党的十七大报告提出，“促进政党关系、民族关系、宗教关系、阶层关系、海内外同胞关系的和谐，对于增进团结、凝聚力量具有不可替代的作用。”胡锦涛同志在给中央社院建院50周年的贺信中明确指出，要“充分发挥社会主义学院作为统一战线的人才培养基地、理论研究基地、方针政策宣传基地的作用，为开创新世纪新阶段统一战线工作的新局面，为实现全面建设小康社会宏伟目标和中华民族伟大复兴作出更大的贡献。”<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甘肃社会主义学院为正厅级全额拨款事业单位，由省委领导，省委统战部指导和管理，是在1952年举办的甘肃省各界民主人士培训班的基础上组建的，1957年6月定名为“甘肃省各界民主人士政治学校”，1964年3月更名为“甘肃省政治学校”，“文革”中停办，1983年11月经省委批准复办，1985年1月更名为“甘肃社会主义学院”。2000年，经省委统战部批准、省教育厅备案，成立甘肃省中华文化学院，与甘肃社会主义学院“一套班子，两块牌子”。<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为了从根本上改善学院办学条件，2007年2月13日，省政府第96次常务会议作出决定，学院与安宁职业技术学校予以合并，安宁职业技术学校隶属学院领导，为学院二级事业单位。2007年12月18日，学院隆重举行了“两校”整合、奠基仪式。<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;建院50年特别是1983年复办以来，在省委、省政府的领导、关怀和省委统战部的指导下，在全省各民主党派、工商联和无党派人士的大力支持下，学院始终坚持社会主义办学方向，发扬“爱国、团结、民主、求实”的校风，为推进我省多党合作事业和巩固、壮大甘肃爱国统一战线发挥了重要作用，做出了积极贡献。
+                    </p>
+                </div>
+				<div class="vspace"></div>
+            </div>
+			<div class="clear"></div>
+        </div>
+    </div>
+{% endblock %}

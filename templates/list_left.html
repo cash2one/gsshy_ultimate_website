@@ -1,0 +1,30 @@
+{% load staticfiles %}
+<div class="w230 fl">
+    <div class="list_menu">
+    	<div class="tit"><span class="on fl">学院简介</span></div>
+    	<div class="border">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;甘肃社会主义学院是中国共产党领导的统一战线性质的政治学院，是民主党派和无党派人士的联合党校，是开展党的统一战线工作的重要部门...
+    		<a href="{% url 'gsshy:introduce' %}" class="more">[查看详情]</a><hr>
+    		<ul class="s_menu">
+                {% for college_category in college_categories %}
+                    <li><a href="{% url 'gsshy:category' college_category.id %}">{{ college_category.name }}</a></li>
+                {% endfor %}
+    		</ul>
+            <div class="clear"></div>
+    	</div>
+
+    	<div class="tit" style="margin-top:10px;"><span class="on fl">最新文章</span></div>
+    	<div class="news">
+    		<div class="clear"></div>
+    		<ul class="n_txt">
+                {% for latest_publish_new in latest_publish_news %}
+                    <li><a href="{% url 'gsshy:new' latest_publish_new.id %}" >{{ latest_publish_new.title|truncatechars:17 }}</a></li>
+                {% endfor %}
+    		</ul>
+            <div class="clear"></div>
+            <div class="more">
+                <a href="{% url 'gsshy:more' %}" >更多>></a>
+            </div>
+    	</div>
+    </div>
+</div>

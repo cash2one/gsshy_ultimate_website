@@ -1,0 +1,39 @@
+{% extends 'list_news_base.html' %}
+
+{% block new_list %}
+    <div class="w750 fr">
+        <div id="list_news">
+				<h3 class="postion">
+                    <span class="dq fl">通知公告</span>
+                    <span class="pos fr">
+                        当前位置：<a href="{% url 'gsshy:index' %}">首页</a> >
+                        <a href="{% url 'gsshy:notice' %}">通知公告</a>
+                    </span>
+                </h3>
+            <div class="list_news">
+                <ul>
+                    {% for notice in notifications %}
+                        <li><a href="{% url 'gsshy:notice' notice.id %}" >{{ notice.title|truncatechars:40 }}</a><span class="date">{{ notice.date_published|date:'Y-m-d' }}</span></li>
+                    {% endfor %}
+                </ul>
+                <div id="flip">
+                    <div class='digg4'>
+                        {% if notifications %}
+                            <a href="?page=1">首页</a>
+                        {% endif %}
+                        {% if notifications.has_previous %}
+                            <a href="?page={{ notifications.previous_page_number }}">上一页</a>&nbsp;
+                        {% endif %}
+                            第{{ notifications.number }}页/总共{{ notifications.paginator.num_pages }}页&nbsp;
+                        {% if notifications.has_next %}
+                            <a href="?page={{ notifications.next_page_number }}">下一页</a>
+                        {% endif %}
+                        {% if notifications %}
+                            <a href="?page={{ notifications.paginator.num_pages }}">尾页</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

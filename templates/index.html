@@ -1,0 +1,309 @@
+{% load staticfiles %}
+{% load gsshy_extras %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<title>甘肃社会主义学院</title>
+<meta name="keywords" content="甘肃社会主义学院"/>
+<meta name="description" content="甘肃社会主义学院" />
+    <link href="{% static 'css/reset.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/common.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/index.css' %}" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="{% static 'js/jquery1.4.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/wtrl.js' %}" ></script>
+    <script type="text/javascript" src="{% static 'js/flash.js' %}"></script>
+</head>
+
+<body>
+
+<!--header头部-->
+{% include 'header.html' %}
+
+<DIV id="main">
+
+	<DIV id="lm2">
+	<!--main_box-->
+		<DIV class="main_box">
+		<!--640px-->
+			<DIV class="w640 fl">
+                <div class="banner" id="kakaFocus">
+					<a class="btn_prev" id="lrbt_show1" style="display:none" title="上一个" href="#">Previous</a>
+					<a class="btn_next" id="lrbt_show2" style="display:none" title="下一个" href="#">Next</a>
+					<div class="banner_pic">
+						<ul>
+                            {% for photo_headline_new in photo_headline_news %}
+                                <li><a href="{% url 'gsshy:new' photo_headline_new.id %}"><img src="{{ MEDIA_URL }}{{ photo_headline_new.image_url }}" ></a></li>
+                            {% endfor %}
+						</ul>
+					</div>
+					<div class="banner_info">
+						<ul>
+                            {% for photo_headline_new in photo_headline_news %}
+                                <li><a href="{% url 'gsshy:new' photo_headline_new.id %}">{{ photo_headline_new.title|truncatechars:20 }}</a></li>
+                            {% endfor %}
+						</ul>
+					</div>
+    				<div class="banner_info_bg"></div>
+				</div>
+
+                <!--资讯动态-->
+				<div class="xwzx">
+                    <div class="tit">
+                        <span class="fl on"><a href="{% url 'gsshy:nav' xinwen_zhongxin_id%}" target="_blank">新闻中心</a></span>
+                        <div class="fr n_tit" id="jj">
+                            <span class="hover" onmouseover="tag(this,1,'jj',3)"><a href="{% url 'gsshy:category' tongzhan_news.id %}" target="_blank">统战要闻</a></span> |
+							<span onmouseover="tag(this,2,'jj',3)"><a href="{% url 'gsshy:category' sheyuan_news.id %}" target="_blank">社院新闻</a></span> |
+							<span onmouseover="tag(this,3,'jj',3)"><a href="{% url 'gsshy:category' shizhou_news.id %}" target="_blank">市州社院</a></span> |
+                        </div>
+                    </div>
+
+                    {% for news in news_list %}
+                        <div class="news_box_inner" id="jj{{ news.index }}" style="{% if news.display == 0 %}display:none{% endif %} ">
+                            <ul class="fr" style="width:540px;height:188px;">
+                            {% for new in news %}
+                                <li><a href="{% url 'gsshy:new' new.id %}" >{{ new.title|truncatechars:32 }}</a>{% if new.date_published|is_new %}<img src="{% static 'images/new.gif' %}" alt="">{% endif %}</li>
+                            {% endfor %}
+                            <li class="more"><a href="{% url 'gsshy:category' news.id %}" target="_blank">更多>></a></li>
+                            </ul>
+                            <div class="clear"></div>
+                        </div>
+                    {% endfor %}
+
+                <div class="clear"></div>
+				</div>
+				<!--/资讯动态-->
+			</DIV>
+		<!--/640px-->
+			
+			<DIV class="w2">
+				<div>
+                    {% for subject in subjects %}
+                        {% if forloop.last %}
+                            <a href="{% url 'gsshy:subject' subject.id %}" target="_blank">
+                                <img src="{{ MEDIA_URL }}{{ subject.image }}" align="right" alt="{{ subject.name }}"/>
+                            </a>
+                        {% else %}
+                            <a href="{% url 'gsshy:subject' subject.id %}" target="_blank">
+                                <img src="{{ MEDIA_URL }}{{ subject.image }}" alt="{{ subject.name }}"/>
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+				</div>
+			</DIV>
+		
+		<!--320px-->
+			<DIV class="w320 fr">
+			<div class="tszl">
+				<h2 class="ts_tit">
+                    <a href="{% url 'gsshy:introduce' %}" target="_blank">学院简介</a>
+                </h2>
+                <div class="ts_box">
+                    <p align="justify">
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        甘肃社会主义学院是中国共产党领导的统一战线性质的政治学院，是民主党派和无党派人士的联合党校，是开展党的统一战线工作的重要部门...
+                        <a href="{% url 'gsshy:introduce' %}" class="more" target="_blank">[查看详情]</a>
+                    </p>
+                    <dl>
+                        {% for college_category in college_categories %}
+                            <dd><a href="{% url 'gsshy:category' college_category.id %}" target="_blank">{{ college_category.name }}</a></dd>
+                        {% endfor %}
+                    </dl>
+				<DIV class="clear"></DIV>
+				</div>
+
+				<div class="announce right" style="height: 145px;">
+					<h2 class="r_tit"><a class="fl" href="{% url 'gsshy:notice' %}" target="_blank">通知公告</a></h2>
+					<div class="r_border" style="height: 78px;">
+						<ul>
+							<marquee onmouseover="this.stop()" onmouseout="this.start()" scrollamount="2" direction="up" height="88px">
+                                {% for notification in notifications %}
+                                    <li><a href="{% url 'gsshy:notice' notification.id %}" >{{ notification.title|truncatechars:24 }}</a></li>
+                                {% endfor %}
+					    	</marquee>
+					  	</ul>
+					</div>
+				</div>
+				<DIV class="clear"></DIV>
+			</div>
+
+			<div class="cgtd">
+			<h2 class="r_tit">
+                <a class="fl" href="{% url 'gsshy:nav' dangwu_news.id %}" target="_blank">党务政务</a>
+                <span class="more fr">
+                    <a href="{% url 'gsshy:nav' dangwu_news.id %}" target="_blank">更多>></a>
+                </span>
+            </h2>
+			<div class="r_border">
+				<ul class="news"> 
+                    {% for dangwu_new in dangwu_news %}
+                        <li>
+                            <a href="{% url 'gsshy:new' dangwu_new.id %}" >
+                                {{ dangwu_new.title|truncatechars:24 }}
+                            </a>
+                            {% if dangwu_new.date_published|is_new %}
+                                <img src="{% static 'images/new.gif' %}" alt="">
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+			</div>
+			</div>
+
+			<div class="cgtd">
+			<h2 class="r_tit">
+                <a class="fl" href="{% url 'gsshy:nav' jiaoxue_news.id %}" target="_blank">教学培训</a>
+                <span class="more fr">
+                    <a href="{% url 'gsshy:nav' jiaoxue_news.id %}" target="_blank">更多>></a>
+                </span>
+            </h2>
+			<div class="r_border">
+                <ul class="news">
+                    {% for jiaoxue_new in jiaoxue_news %}
+                        <li>
+                            <a href="{% url 'gsshy:new' jiaoxue_new.id %}" >
+                                {{ jiaoxue_new.title|truncatechars:24 }}
+                            </a>
+                            {% if jiaoxue_new.date_published|is_new %}
+                                <img src="{% static 'images/new.gif' %}" alt="">
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+			</div>
+			</div>
+			</DIV>
+		<div class="w5">
+			<div>
+                {% for imagelink in imagelinks %}
+                    <a href="{{ imagelink.callback_url }}" target="_blank">
+                        <img src="{{ MEDIA_URL }}{{ imagelink.image }}" alt=""/>
+                    </a>
+                {% endfor %}
+			</div>
+		</div>	
+		<!--/320px-->
+		<DIV class="w320 fr">
+			<div class="cgtd1">
+			<h2 class="r_tit">
+                <a class="fl" href="{% url 'gsshy:nav' keyan_news.id %}" target="_blank">科研工作</a>
+                <span class="more fr">
+                    <a href="{% url 'gsshy:nav' keyan_news.id %}" target="_blank">更多>></a>
+                </span>
+            </h2>
+			<div class="r_border">
+				<ul class="news">
+                    {% for keyan_new in keyan_news %}
+                        <li>
+                            <a href="{% url 'gsshy:new' keyan_new.id %}" >
+                                {{ keyan_new.title|truncatechars:24 }}
+                            </a>
+                            {% if keyan_new.date_published|is_new%}
+                                <img src="{% static 'images/new.gif' %}" alt="">
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+				</ul>
+			</div>
+			</div>	
+			<div class="cgtd">
+				<h2 class="r_tit">
+                    <a class="fl" href="{% url 'gsshy:nav' wenhua_news.id %}" target="_blank">文化交流</a>
+                    <span class="more fr">
+                        <a href="{% url 'gsshy:nav' wenhua_news.id %}" target="_blank">更多>></a>
+                    </span>
+                </h2>
+				<div class="r_border">
+					<ul class="news">
+                        {% for wenhua_new in wenhua_news %}
+                            <li>
+                                <a href="{% url 'gsshy:new' wenhua_new.id %}" >
+                                    {{ wenhua_new.title|truncatechars:24 }}
+                                </a>
+                                {% if wenhua_new.date_published|is_new %}
+                                    <img src="{% static 'images/new.gif' %}" alt="">
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+					</ul>
+				</div>
+			</div>
+			<div class="cgtd">
+				<h2 class="r_tit">
+                    <a class="fl" href="{% url 'gsshy:nav' houqin_news.id %}" target="_blank">后勤服务</a>
+                    <span class="more fr">
+                        <a href="{% url 'gsshy:nav' houqin_news.id %}" target="_blank">更多>></a>
+                    </span>
+                </h2>
+				<div class="r_border">
+					<ul class="news">
+                         {% for houqin_new in houqin_news%}
+                             <li>
+                                 <a href="{% url 'gsshy:new' houqin_new.id %}" >
+                                     {{ houqin_new.title|truncatechars:24 }}
+                                 </a>
+                                 {% if houqin_new.date_published|is_new %}
+                                     <img src="{% static 'images/new.gif' %}" alt="">
+                                 {% endif %}
+                             </li>
+                         {% endfor %}
+					</ul>
+				</div>
+			</div>
+			</DIV>
+		<!--/320px-->
+			<DIV class="clear"></DIV>
+			<div class="yanjiuzhongxin">
+				<div class="div_a">
+                    {% for research_classfication in research_classfication_list %}
+                        <div class="img{{ research_classfication.index }}">
+                            <a class="img{{ research_classfication.key }}" href="{% url 'gsshy:research' research_classfication.id %}" target="_blank">
+                                <img src="{{ MEDIA_URL }}{{ research_classfication.image }}" alt="" class="img{{ research_classfication.key }}">
+                            </a>
+                        </div>
+                    {% endfor %}
+				</div>
+			</div>
+			
+			<!--学院风采-->
+			<div class="w1000scroll">
+				<div class="s_tit"><img src="{% static 'images/xueyuanfengcai.jpg' %}" width="980" alt=""/></div>
+				<div class="rollBox">
+					<div id="roll_1" style="overflow:hidden;height:176px;width:980px;">
+						<table align="left" cellpadding="0" cellspacing="0" border="0">
+							<tr>
+								<td id="roll_2">
+									<table width="100%" height="100%" border="0">
+					 					<tr>
+                                            {% for campus_picture in campus_picture_list %}
+                                                <td style="text-align:center">
+                                                    <div class="img">
+                                                        <img src="{{ MEDIA_URL }}{{ campus_picture.image_url }}" alt="{{ campus_picture.title }}" border="0" width="200" height="150"style="border:1px solid #D5D5D5" align="absmiddle"/>
+                                                    </div>
+                                                <div class="t">{{ campus_picture.title }}</div>
+											</td>
+                                            {% endfor %}
+										</tr>
+									</table>
+						  		</td>
+						  		<td id="roll_3"></td>
+							</tr>
+						</table>
+					</div>
+					<script type="text/javascript" src="{% static 'js/rollbox.js' %}"></script>
+				</div>
+			</div>
+			<!--/学院风采-->
+		</DIV>
+	<!--/main_box-->	
+	<DIV class="clear"></DIV>
+	</DIV>
+</DIV>
+<DIV class="clear"></DIV>
+
+<!--footer-->
+{% include 'footer.html' %}
+
+</body>
+</html>

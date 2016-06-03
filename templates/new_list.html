@@ -1,0 +1,56 @@
+{% extends 'list_news_base.html' %}
+
+{% block new_list %}
+    <div class="w750 fr">
+        <div id="list_news">
+				<h3 class="postion">
+                    <span class="dq fl">
+                        {% if news.cate_name %}
+                            {{ news.cate_name }}
+                        {% else %}
+                            {{ news.nav.name }}
+                            &nbsp;&nbsp;
+                            [
+                                {% for category in news.nav.category_set.all %}
+                                    {% if forloop.last %}
+                                        <a href="{% url 'gsshy:category' category.id %}">{{ category.name }}</a>
+                                    {% else %}
+                                        <a href="{% url 'gsshy:category' category.id %}">{{ category.name }}</a> |
+                                    {% endif %}
+                                {% endfor %}
+                            ]
+                        {% endif %}
+                    </span>
+                    <span class="pos fr">
+                        当前位置：<a href="{% url 'gsshy:index' %}">首页</a> >
+                        <a href="{% url 'gsshy:nav' news.nav.id %}">{{ news.nav.name }}</a>
+                        {% if news.cate_name %}> <a href="">{{ news.cate_name }}</a>{% endif %}
+                    </span>
+                </h3>
+            <div class="list_news">
+                <ul>
+                    {% for new in news %}
+                        <li><a href="{% url 'gsshy:new' new.id %}" >{{ new.title|truncatechars:40 }}</a><span class="date">{{ new.date_published|date:'Y-m-d' }}</span></li>
+                    {% endfor %}
+                </ul>
+                <div id="flip">
+                    <div class='digg4'>
+                        {% if news %}
+                            <a href="?page=1">首页</a>
+                        {% endif %}
+                        {% if news.has_previous %}
+                            <a href="?page={{ news.previous_page_number }}">上一页</a>&nbsp;
+                        {% endif %}
+                            第{{ news.number }}页/总共{{ news.paginator.num_pages }}页&nbsp;
+                        {% if news.has_next %}
+                            <a href="?page={{ news.next_page_number }}">下一页</a>
+                        {% endif %}
+                        {% if news %}
+                            <a href="?page={{ news.paginator.num_pages }}">尾页</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

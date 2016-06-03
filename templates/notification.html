@@ -1,0 +1,58 @@
+{% extends 'article_news_base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="w750 fr">
+        <div id="list_news">
+            <h3 class="postion">
+                <span class="dq fl">通知公告</span>
+                <span class="pos fr">
+                    当前位置：<a href="{% url 'gsshy:index' %}">首页</a> >
+                            <a href="{% url 'gsshy:notice' %}">通知公告</a> >
+                            <a href="">正文</a>
+                </span>
+		        <div class="clear"></div>
+            </h3>
+
+            <div class="content_container">
+                <h3>
+                    {{ notification_obj.title }}
+                </h3>
+                <h5>
+                    发布单位:{{ notification_obj.release_unit.username }} | 发布时间:{{ notification_obj.date_published }} | 浏览次数:{{ notification_obj.view_count }} | <a href="{{ request.META.HTTP_REFERER }}">返回上一页</a>
+                </h5>
+                <div class="function">
+                    <div class="clear"></div>
+                </div>
+                <div id="font_area" class="font_area_mid">
+                    {{ notification_obj.content | safe }}
+                    {% if notification_obj.download_file1 %}
+                        <h1>附件:</h1>
+                        <h2>1.<a href="{% url 'gsshy:download' 'notice' 'a' notification_obj.id %}">{{ notification_obj.download_name1 }}</a></h2>
+                    {% endif %}
+                    {% if notification_obj.download_file2 %}
+                        <h2>2.<a href="{% url 'gsshy:download' 'notice' 'b' notification_obj.id %}">{{ notification_obj.download_name2 }}</a></h2>
+                    {% endif %}
+                    {% if notification_obj.download_file3 %}
+                        <h2>3.<a href="{% url 'gsshy:download' 'notice' 'c' notification_obj.id %}" >{{ notification_obj.download_name3 }}</a></h2>
+                    {% endif %}
+                </div>
+                <div class="vspace"></div>
+				<div class="vspace"></div>
+                <div class="vspace"></div>
+            </div>
+
+			<div class="clear"></div>
+			<div class="prenext">
+                <ul>
+                    {% if current_index > 0 %}
+                        <li>上一篇：<a href="{% url 'gsshy:notice' previous_id %}">{{ previous_notification_obj.title }}</a></li>
+                    {% endif %}
+                    {% if current_index < last_id_index %}
+                        <li>下一篇：<a href="{% url 'gsshy:notice' next_id %}">{{ next_notification_obj.title }}</a></li>
+                    {% endif %}
+				</ul>
+			</div>
+        </div>
+    </div>
+{% endblock %}

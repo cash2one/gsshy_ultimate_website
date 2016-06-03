@@ -1,0 +1,39 @@
+{% extends 'list_news_base.html' %}
+
+{% block new_list %}
+    <div class="w750 fr">
+        <div id="list_news">
+				<h3 class="postion">
+                    <span class="dq fl">搜索新闻</span>
+                    <span class="pos fr">
+                        当前位置：<a href="{% url 'gsshy:index' %}">首页</a> >
+                        <a href="?page={{ results.number }}">搜索新闻</a>
+                    </span>
+                </h3>
+            <div class="list_news">
+                <ul>
+                    {% for result in results %}
+                        <li><a href="{% url 'gsshy:new' result.id %}" >{{ result.title|truncatechars:40 }}</a><span class="date">{{ result.date_published|date:'Y-m-d' }}</span></li>
+                    {% endfor %}
+                </ul>
+                <div id="flip">
+                    <div class='digg4'>
+                        {% if results %}
+                            <a href="?page=1">首页</a>
+                        {% endif %}
+                        {% if results.has_previous %}
+                            <a href="?page={{ results.previous_page_number }}">上一页</a>&nbsp;
+                        {% endif %}
+                            第{{ results.number }}页/总共{{ results.paginator.num_pages }}页&nbsp;
+                        {% if results.has_next %}
+                            <a href="?page={{ results.next_page_number }}">下一页</a>
+                        {% endif %}
+                        {% if results %}
+                            <a href="?page={{ results.paginator.num_pages }}">尾页</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

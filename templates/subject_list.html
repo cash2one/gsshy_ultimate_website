@@ -1,0 +1,41 @@
+{% extends 'list_news_base.html' %}
+
+{% block new_list %}
+    <div class="w750 fr">
+        <div id="list_news">
+				<h3 class="postion">
+                    <span class="dq fl">
+                            {{ subject_obj.name }}
+                    </span>
+                    <span class="pos fr">
+                        当前位置：<a href="{% url 'gsshy:index' %}">首页</a> >
+                        <a href="{% url 'gsshy:subject' subject_obj.id %}">{{ subject_obj.name }}</a>
+                    </span>
+                </h3>
+            <div class="list_news">
+                <ul>
+                    {% for special_new in pagination_special_news %}
+                        <li><a href="{% url 'gsshy:special' special_new.id %}">{{ special_new.title|truncatechars:40 }}</a><span class="date">{{ special_new.date_published|date:'Y-m-d' }}</span></li>
+                    {% endfor %}
+                </ul>
+                <div id="flip">
+                    <div class='digg4'>
+                        {% if pagination_special_news %}
+                            <a href="?page=1">首页</a>
+                        {% endif %}
+                        {% if pagination_special_news.has_previous %}
+                            <a href="?page={{ pagination_special_news.previous_page_number }}">上一页</a>&nbsp;
+                        {% endif %}
+                            第{{ pagination_special_news.number }}页/总共{{ pagination_special_news.paginator.num_pages }}页&nbsp;
+                        {% if pagination_special_news.has_next %}
+                            <a href="?page={{ pagination_special_news.next_page_number }}">下一页</a>
+                        {% endif %}
+                        {% if pagination_special_news %}
+                            <a href="?page={{ pagination_special_news.paginator.num_pages }}">尾页</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

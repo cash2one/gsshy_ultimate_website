@@ -1,0 +1,63 @@
+{% load staticfiles %}
+<link href="{% static 'css/menu.css' %}" rel="stylesheet" />
+<script src="{% static 'js/jquery-1.11.3.js' %}"></script>
+<script src="{% static 'js/MSClass.js' %}"></script>
+
+<div id="topline"></div>
+<div class="clear"></div>
+<div id="top_box">
+	<div id="top_banner">
+		<div class="flash1">
+			<div id="flash">
+				<ul id="ContentID">
+                    {% for pic in top_handover_pics %}
+                        <li><img border=0 src="{{ MEDIA_URL }}{{ pic.image }}" width="1000" height="231"></li>
+                    {% endfor %}
+  				</ul>
+  			</div>
+  			<script type="text/javascript" src="{% static 'js/banner.js' %}"></script>
+		</div>
+	</div>
+<div class="clear"></div>
+	<div id="nav_box">
+		<div class="nav" id="nav">
+			<ul id="topnav">
+				<li class="home"><a href="{% url 'gsshy:index' %}"></a></li>&nbsp;
+                {% for navigation_category in navigation_category_list %}
+                    <li class="nav_fr"><a href="{% url 'gsshy:nav' navigation_category.id %}" target="_blank">{{ navigation_category.name }}</a>
+                        <ul>
+                             {% if navigation_category.name == '研究中心' %}
+                                 {% for category in categories %}
+                                     <li><a href="{% url 'gsshy:research' category.key %}" target="_blank">{{ category.name }}</a></li>
+                                 {% endfor %}
+                             {% else %}
+                                 {% for category in navigation_category.category_set.all %}
+                                     <li><a href="{% url 'gsshy:category' category.id %}" target="_blank">{{ category.name }}</a></li>
+                                 {% endfor %}
+                             {% endif %}
+                        </ul>
+                    </li>
+                {% endfor %}
+			</ul>
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+<div class="clear"></div>
+<div id="top_ad">
+	<div id="top_ad_box">
+		<div id="time">
+			<div class="date fl">
+				<script type="text/javascript" src="{% static 'js/date.js' %}"></script>
+			</div>
+            <div class="search" align="right">
+                <form action="{% url 'gsshy:search' %}" method="post">
+                    {% csrf_token %}
+                    <input type="text" name="keyword" placeholder="请输入新闻标题或日期" size="20">
+                    <button type="submit">搜索</button>
+                </form>
+            </div>
+			<div class="tianqi fl"></div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,48 @@
+{% extends 'list_news_base.html' %}
+
+{% block new_list %}
+    <div class="w750 fr">
+        <div id="list_news">
+				<h3 class="postion">
+                    <span class="dq fl">
+                        <a href="{% url 'gsshy:profile' research_center_profile_obj.id %}">{{ research_classfication_obj.name }}简介</a>
+                    </span>
+                    <span class="pos fr">
+                        当前位置：<a href="{% url 'gsshy:index' %}">首页</a> >
+                        <a href="{% url 'gsshy:research' research_classfication_obj.id %}">{{ research_classfication_obj.name }}</a>
+                    </span>
+                </h3>
+            <div class="list_news">
+                <ul>
+                    {% for pagination_research in pagination_researches %}
+                        <li>
+                            <a href="{% url 'gsshy:data' pagination_research.id %}">
+                                {{ pagination_research.title|truncatechars:40 }}
+                            </a>
+                            <span class="date">
+                                {{ pagination_research.date_published|date:'Y-m-d' }}
+                            </span>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <div id="flip">
+                    <div class='digg4'>
+                        {% if pagination_researches %}
+                            <a href="?page=1">首页</a>
+                        {% endif %}
+                        {% if pagination_researches.has_previous %}
+                            <a href="?page={{ pagination_researches.previous_page_number }}">上一页</a>&nbsp;
+                        {% endif %}
+                            第{{ pagination_researches.number }}页/总共{{ pagination_researches.paginator.num_pages }}页&nbsp;
+                        {% if pagination_researches.has_next %}
+                            <a href="?page={{ pagination_researches.next_page_number }}">下一页</a>
+                        {% endif %}
+                        {% if pagination_researches %}
+                            <a href="?page={{ pagination_researches.paginator.num_pages }}">尾页</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

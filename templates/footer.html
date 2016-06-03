@@ -1,0 +1,47 @@
+{% load staticfiles %}
+<script type="text/javascript" src="{% static 'js/wtrl.js' %}"></script>
+<!--footer-->
+<div class="w1000 partners">
+<h1 id="jj">
+	链接导航
+	[
+		<a href="javascript:void(0)" class="hover" onmouseover="linkTag(this, 1, 'aa', 4)">主要媒体</a>
+		<a href="javascript:void(0)" onmouseover="linkTag(this, 2, 'aa', 4)">统战系统</a>
+		<a href="javascript:void(0)" onmouseover="linkTag(this, 3, 'aa', 4)">各省社院</a>
+		<a href="javascript:void(0)" onmouseover="linkTag(this, 4, 'aa', 4)">市州社院</a>
+	]
+</h1>
+    
+{% for links in links_list %}
+    <div class="partnersLinks" id="aa{{ links.index }}" style="{% if links.display == 0 %}display:none{% endif %} ">
+        <ul>
+            {% for link in links %}
+                <li><a href="{{ link.callback_url }}" target="_blank">{{ link.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endfor %}
+
+</div>
+
+<div class=clear></div>
+<div class="footer-column center">
+    {% for navigation_category in navigation_category_list %}
+        {% if forloop.last %}
+            <a href="{% url 'gsshy:nav' navigation_category.id %}" target="_blank">{{ navigation_category.name }}</a>
+        {% else %}
+            <a href="{% url 'gsshy:nav' navigation_category.id %}" target="_blank">{{ navigation_category.name }}</a> |
+        {% endif %}
+    {% endfor %}
+</div>
+
+<div id="foot">
+	<div class="copy_right">
+		<div class="w1000">
+			<p>Copyright 2012 - 2015 Powered by mesamedia Right Reserved　甘肃社会主义学院</p>
+            <p>地址：兰州市安宁西路818号　电话：0931-7784721　传真：0931-7784721　邮编：730070</p>
+            <p>陇ICP备14001754号</p>
+		</div>
+	</div>
+</div>
+<!--/footer-->

@@ -1,0 +1,33 @@
+{% extends 'article_news_base.html' %}
+
+{% block content %}
+    <div class="w750 fr">
+        <div id="list_news">
+            <h3 class="postion">
+                <span class="dq fl">{{ research_center_profile.research_classfication.name }}</span>
+                <span class="pos fr">
+                    当前位置：<a href="{% url 'gsshy:index' %}">首页</a> > <a href="">{{ research_center_profile.title }}</a>
+                </span>
+		        <div class="clear"></div>
+            </h3>
+
+            <div class="content_container">
+                <h3>
+                    {{ research_center_profile.title }}
+                </h3>
+                <div class="function">
+                    <div class="clear"></div>
+                </div>
+                <div>
+                    {{ research_center_profile.content|safe }}
+                </div>
+                <div class="vspace"></div>
+				<div class="vspace"></div>
+                <div class="vspace"></div>
+            </div>
+
+			<div class="clear"></div>
+			<div class="prenext"></div>
+        </div>
+    </div>
+{% endblock %}

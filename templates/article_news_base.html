@@ -1,0 +1,30 @@
+{% load staticfiles%}
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<title>甘肃社会主义学院</title>
+<meta name="keywords" content="甘肃社会主义学院"/>
+<meta name="description" content="甘肃社会主义学院" />
+<link href="{% static 'css/reset.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'css/common.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'css/list.css' %}" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+{% include 'header.html' %}
+<div class="clear"></div>
+
+<div id="list">
+    {% include 'list_left.html' %}
+    {% block content %}
+    {% endblock %}
+    <div class="clear"></div>
+</div>
+
+<div class="clear"></div>
+<!--links-->
+{% include 'footer.html' %}
+</body>
+</html>

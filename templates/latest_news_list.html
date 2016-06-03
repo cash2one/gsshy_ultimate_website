@@ -1,0 +1,39 @@
+{% extends 'list_news_base.html' %}
+
+{% block new_list %}
+    <div class="w750 fr">
+        <div id="list_news">
+				<h3 class="postion">
+                    <span class="dq fl">最新文章</span>
+                    <span class="pos fr">
+                        当前位置：<a href="{% url 'gsshy:index' %}">首页</a> >
+                        <a href="{% url 'gsshy:more' %}">最新文章</a>
+                    </span>
+                </h3>
+            <div class="list_news">
+                <ul>
+                    {% for latest_new in latest_news_list %}
+                        <li><a href="{% url 'gsshy:new' latest_new.id %}" >{{ latest_new.title|truncatechars:40 }}</a><span class="date">{{ latest_new.date_published|date:'Y-m-d' }}</span></li>
+                    {% endfor %}
+                </ul>
+                <div id="flip">
+                    <div class='digg4'>
+                        {% if latest_news_list %}
+                            <a href="?page=1">首页</a>
+                        {% endif %}
+                        {% if latest_news_list.has_previous %}
+                            <a href="?page={{ latest_news_list.previous_page_number }}">上一页</a>&nbsp;
+                        {% endif %}
+                            第{{ latest_news_list.number }}页/总共{{ latest_news_list.paginator.num_pages }}页&nbsp;
+                        {% if latest_news_list.has_next %}
+                            <a href="?page={{ latest_news_list.next_page_number }}">下一页</a>
+                        {% endif %}
+                        {% if latest_news_list %}
+                            <a href="?page={{ latest_news_list.paginator.num_pages }}">尾页</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

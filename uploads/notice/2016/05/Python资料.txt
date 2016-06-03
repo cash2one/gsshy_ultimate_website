@@ -1,0 +1,10 @@
+Python 类与元类的深度挖掘：
+https://mp.weixin.qq.com/s?__biz=MzA4MjEyNTA5Mw==&mid=2652563615&idx=2&sn=5554645d506e818e4318856b48f456d1&scene=0&key=b28b03434249256bae4a50ef7431bacedb3076923156f58cd5f92d551bede4b1e894c117ba25ecb6d98b7371cea53470&ascene=0&uin=NjQ0MTMxNTIw&devicetype=iMac+MacBookPro12%2C1+OSX+OSX+10.11.2+build(15C50)&version=11020201&pass_ticket=vwqbbc95rQ7PTVl8gnQLAdCCI%2F7YjsI435Jr0AZ2ruWklM6jaEB1brB1wi0CCCih
+
+Python的输入输出：
+https://mp.weixin.qq.com/s?__biz=MzA4MjEyNTA5Mw==&mid=2652563596&idx=2&sn=d9c050f6f4cdfd229a9c719ef7c18790&scene=0&pass_ticket=SEI%2F9PhSzxT06g2%2F%2BafWQ17O6V2tbIKp6hBqOnJMJVT8Ppbbylk%2FXqp%2FQVRSgERx
+
+Python中的枚举类型：
+http://mp.weixin.qq.com/s?__biz=MzA4MjEyNTA5Mw==&mid=2652563610&idx=2&sn=14898fc5c72b30da8442b07db3ed99aa&scene=21#wechat_redirect
+
+

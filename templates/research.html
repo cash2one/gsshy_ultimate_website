@@ -1,0 +1,64 @@
+{% extends 'article_news_base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="w750 fr">
+        <div id="list_news">
+            <h3 class="postion">
+                <span class="dq fl">{{ research_obj.news_category.name }}</span>
+                <span class="pos fr">
+                    当前位置：<a href="{% url 'gsshy:index' %}">首页</a> >
+                            <a href="{% url 'gsshy:research' research_obj.news_category.id %}">{{ research_obj.news_category.name }}</a> >
+                            <a href="">正文</a>
+                </span>
+            </h3>
+
+            <div class="content_container">
+                <h3>
+                    {{ research_obj.title }}
+                </h3>
+                <div style="text-align: center; font:italic bold 17px/24px '微软雅黑', sans-serif">
+                    {% if research_obj.subtitle %}
+                        ——{{ research_obj.subtitle }}
+                    {% endif %}
+                </div>
+                <h5>
+                    发布单位:{{ research_obj.release_unit.username }} | 发布时间:{{ research_obj.date_published | date:"Y-m-d" }} | 浏览次数:{{ research_obj.view_count }} | <a href="{{ request.META.HTTP_REFERER }}">返回上一页</a>
+                </h5>
+                <div class="function">
+                    <div class="clear"></div>
+                </div>
+                <div id="font_area" class="font_area_mid">
+                    {{ research_obj.content | safe }}
+
+                    {% if research_obj.download_file1 %}
+                        <h1>附件:</h1>
+                        <h2>1.<a href="{% url 'gsshy:download' 'research' 'a' research_obj.id %}">{{ research_obj.download_name1 }}</a></h2>
+                    {% endif %}
+                    {% if research_obj.download_file2 %}
+                        <h2>2.<a href="{% url 'gsshy:download' 'research' 'b' research_obj.id %}">{{ research_obj.download_name2 }}</a></h2>
+                    {% endif %}
+                    {% if research_obj.download_file3 %}
+                        <h2>3.<a href="{% url 'gsshy:download' 'research' 'c' research_obj.id %}" >{{ research_obj.download_name3 }}</a></h2>
+                    {% endif %}
+
+                </div>
+                <div class="vspace"></div>
+				<div class="vspace"></div>
+                <div class="vspace"></div>
+            </div>
+
+			<div class="clear"></div>
+			<div class="prenext">
+                <ul>
+                    {% if current_research_index > 0 %}
+                        <li>上一篇：<a href="{% url 'gsshy:data' previous_research_id %}">{{ previous_research_obj.title }}</a></li>
+                    {% endif %}
+                    {% if current_research_index < last_research_id_index %}
+                        <li>下一篇：<a href="{% url 'gsshy:data' next_research_id %}">{{ next_research_obj.title }}</a></li>
+                    {% endif %}
+				</ul>
+			</div>
+        </div>
+    </div>
+{% endblock %}
