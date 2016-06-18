@@ -95,8 +95,14 @@ def global_setting(request):
         # 图片链接
         imagelinks = ImageLink.objects.all()
 
-        # 图片标题新闻
-        photo_headline_news = [article for article in published_articles if article.image_url]
+        # 图片标题新闻，设置最多显示4条新闻
+        photo_headline_news_temp = [article for article in published_articles if article.image_url]
+        photo_headline_news_count = len(photo_headline_news_temp)
+        
+        if photo_headline_news_count <= 4:
+            photo_headline_news = photo_headline_news_temp
+        else:
+            photo_headline_news = photo_headline_news_temp[0:4]
 
         # 新闻中心列表，包含统战要闻、社院新闻、市州社院动态三个分类的新闻，显示面最多显示7条新闻
         news_list = list()
